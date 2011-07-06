@@ -1,0 +1,34 @@
+public void validate_${methodName}(${clbean} obj){
+java.util.List s = null;
+#foreach($mapping in $autofill.mapping)
+		#if($mapping.parameter.indexOf("[]")>-1)
+			#set($kk=$mapping.bean.lastIndexOf(".") + 1)
+			#set($kj=$mapping.bean.lastIndexOf("."))
+			
+			s = obj.${utils.getBeanGetName($mapping.bean.substring(0,$kj))}();
+			for(int i=0;i<s.size();i++){
+				${utils.getInnerBean(${clbean},$mapping.bean)} x = (${utils.getInnerBean(${clbean},$mapping.bean)})s.get(i);
+				#foreach($validator in $mapping.validators)
+					#if($utils.getBeanType("$mapping.type")!=$mapping.type)
+						executeValidator(x,${utils.getBeanObjectType("$mapping.type")}.valueOf(x.${utils.getBeanGetName("$mapping.bean.substring($kk)")}()),"${mapping.parameter}".replace("[]","["+i+"]"),"$validator.message","$validator.expression","$validator.type");
+					#else
+						executeValidator(x,x.${utils.getBeanGetName("$mapping.bean.substring($kk)")}(),"${mapping.parameter}".replace("[]","["+i+"]"),"$validator.message","$validator.expression","$validator.type");
+					#end
+				#end
+			}
+		#end
+#end	
+
+#foreach($mapping in $autofill.mapping)
+	#foreach($validator in $mapping.validators)
+		#if($mapping.parameter.indexOf("[]")>-1)
+			
+		#elseif($utils.getBeanType("$mapping.type")!=$mapping.type)
+			executeValidator(obj,${utils.getBeanObjectType("$mapping.type")}.valueOf(obj.${utils.getBeanGetName("$mapping.bean")}()),"$mapping.parameter","$validator.message","$validator.expression","$validator.type");
+		#else
+			executeValidator(obj,obj.${utils.getBeanGetName("$mapping.bean")}(),"$mapping.parameter","$validator.message","$validator.expression","$validator.type");
+		#end
+			
+	#end
+#end
+}

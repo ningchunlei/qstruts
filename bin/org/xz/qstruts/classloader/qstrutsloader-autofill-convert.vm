@@ -1,0 +1,74 @@
+public ${clbean} convert_${methodName}(){
+${clbean} obj = new ${clbean}();
+java.util.HashMap map = null;
+#set($ct=0)
+#foreach($mapping in $autofill.mapping)
+	#if($mapping.parameter.indexOf("[]") > 0 && $ct==0)
+		map = new java.util.HashMap();
+		#set($ct=1)
+	#end
+#end
+if(map!=null){
+	org.xz.qxork2.validator.Utils.getMap(getRequest(),map);
+	#foreach($mapping in $autofill.mapping)
+		#if($mapping.parameter.indexOf("[]")>-1)
+			java.util.List list = (java.util.List)map.get("$mapping.parameter.substring(0,$mapping.parameter.indexOf("["))");
+			if(list!=null){
+				for(int i=0;i<list.size();i++){
+					String temp = (String)list.get(i);
+					if(!temp.replaceFirst("\\[[0-9]+\\]","[]").equals("${mapping.parameter}")){
+						continue;
+					}
+					
+					int index = org.xz.qxork2.validator.Utils.getArrayIndex(temp);
+					#set($kk=$mapping.bean.lastIndexOf(".") + 1)
+					#set($kj=$mapping.bean.lastIndexOf("."))
+					java.util.List s = obj.${utils.getBeanGetName($mapping.bean.substring(0,$kj))}();
+					if(index > s.size()-1){
+						int c = s.size();
+						for(int i=0;i<=index-c;i++){
+							s.add(null);
+						}
+					}
+					${utils.getInnerBean(${clbean},$mapping.bean)} x = (${utils.getInnerBean(${clbean},$mapping.bean)})s.get(index);
+					if(x==null){
+						x = new  ${utils.getInnerBean(${clbean},$mapping.bean)}();
+						s.set(index,x);
+					}
+					#if($utils.getBeanType("$mapping.type")!=$mapping.type)
+						$utils.getBeanObjectType("$mapping.type") xt = (($utils.getBeanObjectType("$mapping.type"))getParameter(temp,"$mapping.type","$mapping.message"));
+						if(xt!=null){
+							x.${utils.getBeanSetName($mapping.bean.substring($kk))}(xt.${utils.getBeanType("$mapping.type")}Value());
+						}
+					#else
+						$utils.getBeanType("$mapping.type") xt = ($utils.getBeanType("$mapping.type"))getParameter(temp,"$mapping.type","$mapping.message");
+						if(xt!=null){
+							x.${utils.getBeanSetName($mapping.bean.substring($kk))}(($utils.getBeanType("$mapping.type"))getParameter(temp,"$mapping.type","$mapping.message"));	
+						}
+					#end
+				}			
+			}	
+		#end
+	#end	
+}
+#foreach($mapping in $autofill.mapping)
+	#if($mapping.parameter.indexOf("[]")>0)
+	 	
+	#elseif($utils.getBeanType("$mapping.type")!=$mapping.type)
+		$utils.getBeanObjectType("$mapping.type") x = (($utils.getBeanObjectType("$mapping.type"))getParameter("$mapping.parameter","$mapping.type","$mapping.message"));
+		if(x!=null){
+			obj.${utils.getBeanSetName("$mapping.bean")}(x.${utils.getBeanType("$mapping.type")}Value());
+		}
+	#else
+		$utils.getBeanType("$mapping.type") x = ($utils.getBeanType("$mapping.type"))getParameter("$mapping.parameter","$mapping.type","$mapping.message");
+		if(x!=null){
+			obj.${utils.getBeanSetName("$mapping.bean")}(($utils.getBeanType("$mapping.type"))getParameter("$mapping.parameter","$mapping.type","$mapping.message"));	
+		}
+	#end
+#end 
+
+
+return obj;
+}
+
+

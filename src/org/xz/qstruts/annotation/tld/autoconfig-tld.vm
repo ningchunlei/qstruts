@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+  <description></description>
+  <display-name>""</display-name>
+  <tlib-version>${version}</tlib-version>
+  <short-name>${shortname}</short-name>
+  <uri>${uri}</uri>
+  #foreach($tag in $taglist)
+  	<tag>
+	    <description><![CDATA[$tag.description]]></description>
+	    <name>$tag.name</name>
+	    <tag-class>$tag.tagclazz</tag-class>
+	    <body-content>$tag.body</body-content>
+	    #foreach($attr in $tag.attributes)
+		<attribute>
+		<description><![CDATA[$attr.description]]></description>
+		<name>${attr.name}</name>
+		<required>${attr.required}</required>
+		<rtexprvalue>${attr.rtexprvalue}</rtexprvalue>
+		</attribute>	
+	    #end
+		<dynamic-attributes>$tag.dyAttribute</dynamic-attributes>
+  	</tag>
+  #end	
+</taglib>
