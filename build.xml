@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="qstruts" basedir="." default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<property name="version" value="2.0"/>
+	<property name="module" value="qstruts" />
+	<property name="groupid" value="org.xz" />
+	<property name="doc.dir" value="${basedir}/doc"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="lib.dir" location="${basedir}/lib"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="dist.dir" value="${basedir}/dist"/>
+	<property name="api.dir" value="${doc.dir}/api"/>
+	<property name="jar.file" value="${module}.${version}.jar"/>
+	<property name="UTF-8.encoding" value="UTF-8"/>
+	<property name="pom.file" value="${module}.${version}.pom" />
+	
+	<path id="compile.classpath">
+		<fileset dir="${basedir}/lib" includes="*.jar"/>
+		<pathelement location="${build.dir}/classes" />
+	</path>
+	
+	<tstamp>
+		<format property="TODAY_CN" pattern="yyyyMMdd" locale="zh,CN"/>
+	</tstamp>
+	
+	<target name="init-lib">
+			<ivy:configure url="http://rop.ig.com:8081/nexus/content/repositories/ig-settings/ivysetttings.xml"/>
+			<ivy:convertpom pomFile="${pom.file}" ivyFile="ivy.xml"/> 
+			<ivy:retrieve/>
+	</target>
+	
+	<target name="clean">	
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+	</target>
+
+	<target name="init" depends="clean,init-lib">
+		<mkdir dir="${build.dir}/classes"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+    
+	<target name="compile" depends="init">		
+		<javac srcdir="${src.dir}"
+		            destdir="${build.dir}/classes"
+		            classpathref="compile.classpath"
+					encoding="${UTF-8.encoding}"
+					debug="true"
+			target="1.5"/>
+		
+		<copy todir="${build.dir}/classes">
+		    <fileset dir="${src.dir}">
+		    	<exclude name="log4j.properties"/>
+		     	<include name="**/*.xml"/>
+		    	<include name="**/*.vm"/>
+		    	<include name="**/*.properties"/>
+		    	<include name="**/*.xsd"/>
+		    </fileset>
+		</copy>
+		
+	</target>
+	
+	<target name="tld">
+		<taskdef name="tldcreate" classname="org.xz.qstruts.annotation.tld.AutoConfig" classpathref="compile.classpath"/>
+		<tldcreate tldFile="${basedir}/META-INF/qstruts-tags.tld" shortName="q" uri="/qstruts-tags" version="2.0"/>
+	</target>
+	
+	<target name="jar" depends="compile,tld">
+		<jar jarfile="${dist.dir}/${jar.file}" basedir="${build.dir}/classes">
+			<metainf dir="${basedir}/META-INF" includes="*.*">
+			</metainf>
+		</jar>
+	</target>
+	
+	<target name="doc" depends="init">
+		<delete dir="${api.dir}"/>
+		<mkdir dir="${api.dir}"/>
+			
+		<javadoc destdir="${api.dir}" classpathref="compile.classpath" Encoding="${UTF-8.encoding}" 
+			docencoding="${UTF-8.encoding}" useexternalfile="yes" charset="${UTF-8.encoding}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java"/>
+			</fileset>
+		</javadoc>
+		
+	</target>
+	
+	<target name="design">
+			<taskdef name="designdoclet" classname="xdoclet.DocletTask" classpathref="compile.classpath"/>
+			<designdoclet destdir="test">
+			      <fileset dir="${src}">
+			         <include name="**/*.java"/>
+			      </fileset>
+			      <template templateFile="template.xdt" destinationfile="test.txt"/>
+			 </designdoclet>
+		</target>
+	
+	
+	<target name="install" depends="jar">
+		<exec executable="cmd" error="out.error" output="out.out" >
+		    <arg value="/c"/>
+		    <arg line="mvn deploy:deploy-file -Dfile=${basedir}\dist\${jar.file} -DpomFile=${basedir}\${pom.file} -Durl=${mvn.serverUrl} -DrepositoryId=${mvn.serverId}"/>
+		</exec>
+		<echo>install finish</echo>
+	</target>
+		
+</project>

@@ -1,0 +1,19 @@
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'deploy'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Default Project
+[INFO]    task-segment: [deploy:deploy-file] (aggregator-style)
+[INFO] ------------------------------------------------------------------------
+[INFO] [deploy:deploy-file {execution: default-cli}]
+Uploading: http://rop.ig.com:8081/nexus/content/repositories/ig-releases-local/org/xz/qstruts/2.0/qstruts-2.0.jar
+4/174K8/174K12/174K16/174K20/174K24/174K28/174K32/174K36/174K40/174K44/174K48/174K52/174K56/174K60/174K64/174K68/174K72/174K76/174K80/174K84/174K88/174K92/174K96/174K100/174K104/174K108/174K112/174K116/174K120/174K124/174K128/174K132/174K136/174K140/174K144/174K148/174K152/174K156/174K160/174K164/174K168/174K172/174K174/174K174K uploaded  (qstruts-2.0.jar)
+[INFO] Retrieving previous metadata from local
+[INFO] Uploading repository metadata for: 'artifact org.xz:qstruts'
+[INFO] Uploading project information for qstruts 2.0
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4 seconds
+[INFO] Finished at: Wed Jul 06 11:01:23 CST 2011
+[INFO] Final Memory: 4M/8M
+[INFO] ------------------------------------------------------------------------

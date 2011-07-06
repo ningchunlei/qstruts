@@ -1,0 +1,229 @@
+<doc>
+<head>
+	<title>B2C-详细设计文档</title>
+	<author>宁春雷</author>
+	<date>2011/3/24</date>
+</head>
+<body>
+	
+	<XDtDesign:forAllSystems type="{m:[{id:'权限系统',m:[{id:'会员管理模块'}]}]}">
+			<section>
+				<title><XDtDesign:systemTitle/></title>
+				<XDtDesign:forAllModules>
+					<section>
+						<title><XDtDesign:moduleTitle/></title>
+						<XDtDesign:forAllClass type="service">
+						<section>
+							<title><XDtDesign:type name="name"/>服务</title>	
+							<XDtDesign:ifVersionSize>
+							<table layout="fixed" border-color="#9BBB59">
+							<col number="1" width="33%"/>
+							<col number="2" width="33%"/>
+							<col number="3" width="33%"/>
+							<thead>
+								<tr>
+									<th align="center"  border-color="#9BBB59">版本</th>
+									<th align="center"  border-color="#9BBB59">时间</th>
+									<th align="center"  border-color="#9BBB59">作者</th>
+								</tr>
+							</thead>
+							<tbody>
+							<XDtDesign:forAllVersion>
+								<tr>
+								
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="version"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="date"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="author"/></td>
+								</tr>
+							</XDtDesign:forAllVersion>
+							</tbody>
+							</table>
+							</XDtDesign:ifVersionSize>
+								<XDtDesign:forAllFunction>
+									<table layout="fixed" border-color="#4BACC6">
+										<col number="1" width="30%"/>
+										<col number="2" width="70%"/>
+										<tbody>
+										<tr>
+											<td border-color="#4BACC6">函数名</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="name"/></td>
+										</tr>
+										<tr>
+											<td background-color="#EEEEEE" border-color="#4BACC6">备注</td>
+											<td background-color="#EEEEEE" border-color="#4BACC6"><XDtDesign:fn name="remark"/></td>
+										</tr>
+										<tr>
+											<td border-color="#4BACC6">描述</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="description"/></td>
+										</tr>
+										</tbody>
+									</table>
+								</XDtDesign:forAllFunction>
+							</section>
+						</XDtDesign:forAllClass>
+						
+						<XDtDesign:forAllClass type="dao">
+							<section>
+							<title><XDtDesign:type name="name"/>服务</title>
+							<XDtDesign:ifVersionSize>
+							<table layout="fixed" border-color="#9BBB59">
+							<col number="1" width="33%"/>
+							<col number="2" width="33%"/>
+							<col number="3" width="33%"/>
+							<thead>
+								<tr>
+									<th align="center"  border-color="#9BBB59">版本</th>
+									<th align="center"  border-color="#9BBB59">时间</th>
+									<th align="center"  border-color="#9BBB59">作者</th>
+								</tr>
+							</thead>
+							<tbody>
+							<XDtDesign:forAllVersion>
+								<tr>
+								
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="version"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="date"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="author"/></td>
+								</tr>
+							</XDtDesign:forAllVersion>
+							</tbody>
+							</table>
+							</XDtDesign:ifVersionSize>
+								<XDtDesign:forAllFunction>
+									<table layout="fixed" border-color="#4BACC6">
+										<col number="1" width="30%"/>
+										<col number="2" width="70%"/>
+										<tbody>
+										<tr>
+											<td border-color="#4BACC6">函数名</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="name"/></td>
+										</tr>
+										<tr>
+											<td background-color="#EEEEEE" border-color="#4BACC6">备注</td>
+											<td background-color="#EEEEEE" border-color="#4BACC6"><XDtDesign:fn name="remark"/></td>
+										</tr>
+										<tr>
+											<td border-color="#4BACC6">描述</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="description"/></td>
+										</tr>
+										<tr>
+											<td background-color="#EEEEEE" border-color="#4BACC6">SQL</td>
+											<td background-color="#EEEEEE" border-color="#4BACC6"><XDtDesign:fn name="sql"/></td>
+										</tr>
+										<tr>
+											<td border-color="#4BACC6">Cache</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="cache"/></td>
+										</tr>
+										</tbody>
+									</table>
+								</XDtDesign:forAllFunction>
+							</section>
+						</XDtDesign:forAllClass>
+						
+						<XDtDesign:forAllClass type="entity">
+							<section>
+							<title><XDtDesign:type name="name"/>实体表</title>
+							<XDtDesign:ifVersionSize>
+							<table layout="fixed" border-color="#9BBB59">
+							<col number="1" width="33%"/>
+							<col number="2" width="33%"/>
+							<col number="3" width="33%"/>
+							<thead>
+								<tr>
+									<th align="center"  border-color="#9BBB59">版本</th>
+									<th align="center"  border-color="#9BBB59">时间</th>
+									<th align="center"  border-color="#9BBB59">作者</th>
+								</tr>
+							</thead>
+							<tbody>
+							<XDtDesign:forAllVersion>
+								<tr>
+								
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="version"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="date"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="author"/></td>
+								</tr>
+							</XDtDesign:forAllVersion>
+							</tbody>
+							</table>
+							</XDtDesign:ifVersionSize>
+								<table layout="fixed" border-color="#4BACC6">
+									<col number="1" width="33%"/>
+									<col number="2" width="33%"/>
+									<col number="3" width="33%"/>
+									<thead>
+									<tr>
+										<th align="center"  border-color="#4BACC6">字段</th>
+										<th align="center"  border-color="#4BACC6">字段描述</th>
+										<th align="center"  border-color="#4BACC6">描述</th>
+									</tr>
+									</thead>
+								<tbody>
+								<XDtDesign:forAllFunction>
+									<tr>
+										<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="fn"/>" border-color="#4BACC6"><XDtDesign:fn name="column"/></td>
+										<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="fn"/>" border-color="#4BACC6"><XDtDesign:version name="column-desc"/></td>
+										<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="fn"/>" border-color="#4BACC6"><XDtDesign:version name="description"/></td>
+									</tr>
+								</XDtDesign:forAllFunction>
+								</tbody>
+								</table>
+							</section>
+						</XDtDesign:forAllClass>
+						
+						<XDtDesign:forAllClass type="domain">
+							<title><XDtDesign:type name="name"/>领域模型</title>	
+							<XDtDesign:ifVersionSize>
+							<table layout="fixed" border-color="#9BBB59">
+							<col number="1" width="33%"/>
+							<col number="2" width="33%"/>
+							<col number="3" width="33%"/>
+							<thead>
+								<tr>
+									<th align="center"  border-color="#9BBB59">版本</th>
+									<th align="center"  border-color="#9BBB59">时间</th>
+									<th align="center"  border-color="#9BBB59">作者</th>
+								</tr>
+							</thead>
+							<tbody>
+							<XDtDesign:forAllVersion>
+								<tr>
+								
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="version"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="date"/></td>
+									<td background-color="<XDtDesign:oddoreven odd='' even='#EEEEEE' type="version"/>" border-color="#9BBB59"><XDtDesign:version name="author"/></td>
+								</tr>
+							</XDtDesign:forAllVersion>
+							</tbody>
+							</table>
+							</XDtDesign:ifVersionSize>
+								<XDtDesign:forAllFunction>
+									<table layout="fixed" border-color="#4BACC6">
+										<col number="1" width="30%"/>
+										<col number="2" width="70%"/>
+										<tbody>
+										<tr>
+											<td border-color="#4BACC6">函数名</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="name"/></td>
+										</tr>
+										<tr>
+											<td background-color="#EEEEEE" border-color="#4BACC6">备注</td>
+											<td background-color="#EEEEEE" border-color="#4BACC6"><XDtDesign:fn name="remark"/></td>
+										</tr>
+										<tr>
+											<td border-color="#4BACC6">描述</td>
+											<td border-color="#4BACC6"><XDtDesign:fn name="description"/></td>
+										</tr>
+										</tbody>
+									</table>
+								</XDtDesign:forAllFunction>
+							</section>
+						</XDtDesign:forAllClass>
+						
+					</section>
+				</XDtDesign:forAllModules>
+			</section>
+		</XDtDesign:forAllSystems>
+</body>
+</doc>
+
